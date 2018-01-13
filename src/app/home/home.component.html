@@ -12,11 +12,12 @@
   <app-tab tabTitle="Tab 2">Tab 2 Content</app-tab>
   <app-tab
    tabTitle="Tab 3"
-   [template]="characterEdit">
+   [template]="characterEdit"
+   [dataContext]="messageTab3">
    Tab 3 Content</app-tab>
 </app-tabs>
 
-<ng-template #characterEdit>
-  Hi, I am a static template defined within the template
-  of another component.
+<!-- "data"はngTemplateOutletContext で宣言したもの" -->
+<ng-template #characterEdit let-message="data">
+        Hi, I'm {{ message }}.
 </ng-template>

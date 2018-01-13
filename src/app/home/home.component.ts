@@ -9,11 +9,13 @@ import { Observable } from 'rxjs/Observable';
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('characterEdit') characterEditTemplate;
   public message: string;
+  public messageTab3: string;
 
   constructor() {}
 
   ngOnInit() {
     this.message = 'Hello';
+    this.messageTab3 = 'konbanha';
   }
 
   ngAfterViewInit() {
