@@ -14,7 +14,9 @@ import { TabComponent } from './tab.component';
   selector: 'app-tabs',
   template: `
     <ul class="nav nav-tabs">
-      <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
+      <li *ngFor="let tab of tabs" 
+        (click)="selectTab(tab)" 
+        [class.active]="tab.active">
         <a href="#">tab title is "{{tab.tabTitle}}"</a>
       </li>
     </ul>
@@ -23,6 +25,12 @@ import { TabComponent } from './tab.component';
   styles: []
 })
 export class TabsComponent implements OnInit, AfterContentInit {
+  /**
+   * 子は取得結果としての返り値は QueryList と呼ばれる、
+   * 配列に似た要素集合で取得するのが一般的です。
+   * QueryListは、forEach メソッドでの繰り返し処理や、 
+   * length プロパティによる要素数の取得が可能です。
+   */
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
   constructor() { }

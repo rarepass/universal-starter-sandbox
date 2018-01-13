@@ -1,7 +1,6 @@
 <h3>{{ message }}</h3>
 <app-character-list></app-character-list>
 
-
 <h3>tabs demo</h3>
 <app-tabs>
   <!--
@@ -11,9 +10,13 @@
     -->
   <app-tab tabTitle="Tab 1">Tab 1 Content</app-tab>
   <app-tab tabTitle="Tab 2">Tab 2 Content</app-tab>
+  <app-tab
+   tabTitle="Tab 3"
+   [template]="characterEdit">
+   Tab 3 Content</app-tab>
 </app-tabs>
 
-<ng-template #personEdit>
+<ng-template #characterEdit>
   Hi, I am a static template defined within the template
   of another component.
 </ng-template>
