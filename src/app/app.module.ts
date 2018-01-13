@@ -9,6 +9,9 @@ import { CharacterEditComponent } from './characters/character-edit/character-ed
 import { CharacterListComponent } from './characters/character-list/character-list.component';
 import { CharacterItemComponent } from './characters/character-list/character-item/character-item.component';
 import { CharacterService } from './characters/character.service';
+import { TabsComponent } from './tabs/tabs.component';
+import { TabComponent } from './tabs/tab.component';
+import { TabsModule } from './tabs/tabs.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { CharacterService } from './characters/character.service';
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule'},
       { path: 'lazy/nested', loadChildren: './lazy/lazy.module#LazyModule'}
-    ])
+    ]),
+    TabsModule
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]
