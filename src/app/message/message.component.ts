@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-
+import { Store } from '@ngrx/store';
 //import all is big. for dev.
 import 'rxjs/Rx';
 
@@ -12,10 +12,10 @@ import 'rxjs/Rx';
   selector: 'app-message',
   template: `
     <h1>
-      {{message}}
+      MESSAGE AREA
     </h1>
     <button (click)="click$.next()">  Update</button>
-    {{clock$ | async | date:'EEEE, MMMM dd, y, hh:mm:ss a'}}
+    <h1>{{clock | async | date:'medium'}}</h1>
 
   `,
   styles: [`
@@ -27,27 +27,19 @@ import 'rxjs/Rx';
 })
 export class MessageComponent implements OnInit {
   click$ = new Subject();
-  clock$;
+  clock;
 
-  private message = "message area";
-  constructor() {
-  
-    this.clock$ = Observable.merge(
-      this.click$.mapTo('hour'),
-      Observable.interval(1000).mapTo('second')
+  constructor(store: Store<any>) {
+    this.clock = store.select('clock')
+
+    Observable.merge(
+        this.click$.mapTo('hour'),
+        Observable.interval(1000).mapTo('second')
     )
-    .startWith(new Date())
-    .scan((acc, curr) => {
-      const date = new Date(acc.getTime());
-      if(curr === 'second') {
-        date.setSeconds(date.getSeconds() + 1)
-      }
-      if(curr === 'hour') {
-        date.setHours(date.getHours() + 1)
-      } 
-      return date;
-    });
-  }
+      .subscribe((type)=>{
+         store.dispatch({type})
+      })
+}
 
   ngOnInit() {
   }
