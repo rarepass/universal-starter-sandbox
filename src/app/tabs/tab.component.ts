@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tab',
@@ -12,6 +12,7 @@ import { Component, Input, OnInit, AfterViewInit, AfterViewChecked } from '@angu
   template: `
     <div [hidden]="!active" class="pane">
       <ng-content *ngIf="!template"></ng-content>
+      
       <ng-container *ngIf="template"
       [ngTemplateOutlet]="template"
       [ngTemplateOutletContext]="{ data: dataContext }"
@@ -19,7 +20,7 @@ import { Component, Input, OnInit, AfterViewInit, AfterViewChecked } from '@angu
     </div>
   `
 })
-export class TabComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class TabComponent implements OnInit {
 
   @Input() tabTitle: string;
   @Input() active = false;
@@ -30,15 +31,6 @@ export class TabComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   ngOnInit() {
     
-  }
-  ngAfterViewInit(){
-    console.log("ngAfterViewInit");
-  }  
-  ngAfterViewChecked(){
-    console.log("AfterViewChecked")
-  }
-  testClick(val:string){
-    console.log("test" + val);
   }
 
 }

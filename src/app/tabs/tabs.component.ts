@@ -6,6 +6,7 @@ import {
   ContentChild, 
   ContentChildren 
 } from '@angular/core';
+import { TodoService} from '../todo/todo.service';
 
 // import { ContentChild, ContentChildren } from '@angular/core/src/metadata/di';
 import { TabComponent } from './tab.component';
@@ -16,10 +17,12 @@ import { TabComponent } from './tab.component';
     <ul class="nav nav-tabs">
       <li *ngFor="let tab of tabs" 
         (click)="selectTab(tab)" 
+        (click)="getTodos(tab.tabTitle)" 
         [class.active]="tab.active">
         <a href="#">{{tab.tabTitle}}</a>
       </li>
     </ul>
+    <app-todo [todo]="todo"></app-todo>
     <ng-content></ng-content>
   `,
   styles: []
@@ -32,10 +35,12 @@ export class TabsComponent implements OnInit, AfterContentInit {
    * length プロパティによる要素数の取得が可能です。
    */
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
+  public todo;
 
-  constructor() { }
+  constructor( private todoService: TodoService) {}
 
   ngOnInit() {
+    this.getTodos('high');
   }  
   // contentChildren are set
   ngAfterContentInit() {
@@ -55,5 +60,16 @@ export class TabsComponent implements OnInit, AfterContentInit {
     // activate the tab the user has clicked on.
     tab.active = true;
   }
-  
+
+  getTodos(filter:string){
+    this.todoService.getTodos(filter).subscribe(data => {
+      this.todo = data;
+    },
+    err => {
+      console.log(err, 'error')
+    },
+    () => {console.log("done")}
+    )
+  }
+
 }

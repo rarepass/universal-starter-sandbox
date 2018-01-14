@@ -6,24 +6,17 @@
 (click)="testClick('middle')"
 >update</button>
 <app-tabs>
-  <app-tab tabTitle="high">
-    <app-todo [todo]="todo"></app-todo>   
-  </app-tab>
-  <app-tab 
-    tabTitle="middle"
-    (click)="getTodos('middle')"
-  >
-  <app-todo [todo]="todo"></app-todo>
-  </app-tab>
-  <app-tab tabTitle="low">Tab 2 Content</app-tab>
+  <app-tab tabTitle="high"></app-tab>
+  <app-tab tabTitle="middle"></app-tab>
+  <app-tab tabTitle="low"></app-tab>
   <app-tab
-   tabTitle="Tab 3"
+   tabTitle="ngTemplateOutletContext"
    [template]="characterEdit"
-   [dataContext]="messageTab3">
+   [dataContext]="messageDataContext">
    Tab 3 Content</app-tab>
 </app-tabs>
 
 <!-- "data"はngTemplateOutletContext で宣言したもの" -->
-<ng-template #characterEdit let-message="data">
-        Hi, I'm {{ message }}.
+<ng-template #characterEdit let-messageDataContext="data">
+        Hi, I'm {{ messageDataContext }}.
 </ng-template>
