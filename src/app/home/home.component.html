@@ -1,2 +1,22 @@
 <h3>{{ message }}</h3>
 <app-character-list></app-character-list>
+
+<h3>tabs demo</h3>
+<button 
+(click)="testClick('middle')"
+>update</button>
+<app-tabs>
+  <app-tab tabTitle="high"></app-tab>
+  <app-tab tabTitle="middle"></app-tab>
+  <app-tab tabTitle="low"></app-tab>
+  <app-tab
+   tabTitle="ngTemplateOutletContext"
+   [template]="characterEdit"
+   [dataContext]="messageDataContext">
+   Tab 3 Content</app-tab>
+</app-tabs>
+
+<!-- "data"はngTemplateOutletContext で宣言したもの" -->
+<ng-template #characterEdit let-messageDataContext="data">
+        Hi, I'm {{ messageDataContext }}.
+</ng-template>
