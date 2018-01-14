@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'app-tab',
@@ -19,7 +19,7 @@ import { Component, Input, OnInit } from '@angular/core';
     </div>
   `
 })
-export class TabComponent implements OnInit {
+export class TabComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @Input() tabTitle: string;
   @Input() active = false;
@@ -29,6 +29,16 @@ export class TabComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
+  }
+  ngAfterViewInit(){
+    console.log("ngAfterViewInit");
+  }  
+  ngAfterViewChecked(){
+    console.log("AfterViewChecked")
+  }
+  testClick(val:string){
+    console.log("test" + val);
   }
 
 }

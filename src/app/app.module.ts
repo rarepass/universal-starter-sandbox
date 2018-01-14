@@ -12,6 +12,7 @@ import { CharacterService } from './characters/character.service';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
 import { TabsModule } from './tabs/tabs.module';
+import { TodoModule } from './todo/todo.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TabsModule } from './tabs/tabs.module';
       { path: 'lazy', loadChildren: './lazy/lazy.module#LazyModule'},
       { path: 'lazy/nested', loadChildren: './lazy/lazy.module#LazyModule'}
     ]),
-    TabsModule
+    TabsModule,
+    TodoModule,
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]

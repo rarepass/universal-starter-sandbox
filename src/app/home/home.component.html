@@ -2,14 +2,20 @@
 <app-character-list></app-character-list>
 
 <h3>tabs demo</h3>
+<button 
+(click)="testClick('middle')"
+>update</button>
 <app-tabs>
-  <!--
-  <app-tab tabTitle="People List">
-    <app-people-list [people]="people"></app-people-list>    
+  <app-tab tabTitle="high">
+    <app-todo [todo]="todo"></app-todo>   
   </app-tab>
-    -->
-  <app-tab tabTitle="Tab 1">Tab 1 Content</app-tab>
-  <app-tab tabTitle="Tab 2">Tab 2 Content</app-tab>
+  <app-tab 
+    tabTitle="middle"
+    (click)="getTodos('middle')"
+  >
+  <app-todo [todo]="todo"></app-todo>
+  </app-tab>
+  <app-tab tabTitle="low">Tab 2 Content</app-tab>
   <app-tab
    tabTitle="Tab 3"
    [template]="characterEdit"

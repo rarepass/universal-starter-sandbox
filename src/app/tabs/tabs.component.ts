@@ -17,7 +17,7 @@ import { TabComponent } from './tab.component';
       <li *ngFor="let tab of tabs" 
         (click)="selectTab(tab)" 
         [class.active]="tab.active">
-        <a href="#">tab title is "{{tab.tabTitle}}"</a>
+        <a href="#">{{tab.tabTitle}}</a>
       </li>
     </ul>
     <ng-content></ng-content>
@@ -55,4 +55,5 @@ export class TabsComponent implements OnInit, AfterContentInit {
     // activate the tab the user has clicked on.
     tab.active = true;
   }
+  
 }
