@@ -11,8 +11,10 @@ import { CharacterItemComponent } from './characters/character-list/character-it
 import { CharacterService } from './characters/character.service';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
+
 import { TabsModule } from './tabs/tabs.module';
 import { TodoModule } from './todo/todo.module';
+import { MessageModule } from './message/message.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { TodoModule } from './todo/todo.module';
     ]),
     TabsModule,
     TodoModule,
+    MessageModule,
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]

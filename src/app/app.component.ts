@@ -9,6 +9,7 @@ import { Meta, Title } from '@angular/platform-browser';
   <a routerLink="/lazy">Lazy</a>
   <a routerLink="/lazy/nested">Lazy_Nested</a>
   <router-outlet></router-outlet>
+  <app-message><app-message>
   `,
   styles: []
 })
