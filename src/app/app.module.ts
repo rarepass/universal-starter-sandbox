@@ -16,12 +16,15 @@ import { TabsModule } from './tabs/tabs.module';
 import { TodoModule } from './todo/todo.module';
 import { MessageModule } from './message/message.module';
 
+// for dev
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environemnt
+
 // ngrx
 // https://github.com/ngrx/store-devtools
 // import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 //FormsModule,
 // needs @ngrx/store: 4.1.1  
-
 import { StoreModule } from '@ngrx/store';
 import { clock, people } from './message/message.reducer';
 
@@ -44,7 +47,12 @@ import { clock, people } from './message/message.reducer';
     TabsModule,
     TodoModule,
     MessageModule,
-    StoreModule.forRoot({clock, people})
+    StoreModule.forRoot({clock, people}),
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge: 25 // Retains last 25 states,
+      //logOnly: environment.production // Restrict extension to log-only mode
+    })
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]
