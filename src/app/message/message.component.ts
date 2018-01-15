@@ -18,8 +18,7 @@ import { HOST_ATTR } from '@angular/platform-browser/src/dom/dom_renderer';
     </h1>
     <input #inputNum type="number" value="0">
     <button (click)="click$.next(inputNum.value)">  Update</button>
-    <h1>{{clock | async | date:'medium'}}</h1>
-
+    <app-clock [time]="time | async"></app-clock>
   `,
   styles: [`
     h1 {
@@ -40,10 +39,10 @@ export class MessageComponent implements OnInit {
     .interval(1000)
     .mapTo({type:SECOND, payload: 1});
 
-  clock;
+  time;
 
   constructor(store: Store<any>) {
-    this.clock = store.select('clock')
+    this.time = store.select('clock')
 
     Observable.merge(
       this.click$,
