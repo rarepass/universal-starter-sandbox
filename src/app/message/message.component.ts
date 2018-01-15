@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { HOUR, SECOND } from './message.reducer';
 //import all is big. for dev.
 import 'rxjs/Rx';
+import { HOST_ATTR } from '@angular/platform-browser/src/dom/dom_renderer';
 
 // import 'rxjs/add/observable/interval';
 // import { map } from 'rxjs/operator';
@@ -15,7 +16,8 @@ import 'rxjs/Rx';
     <h1>
       MESSAGE AREA
     </h1>
-    <button (click)="click$.next()">  Update</button>
+    <input #inputNum type="number" value="0">
+    <button (click)="click$.next(inputNum.value)">  Update</button>
     <h1>{{clock | async | date:'medium'}}</h1>
 
   `,
@@ -26,20 +28,28 @@ import 'rxjs/Rx';
     `
   ]
 })
+
 export class MessageComponent implements OnInit {
-  click$ = new Subject();
+
+  click$ = new Subject<string>()
+    // have to wrap that in ();
+    // we want it to be a object;
+    .map( (value) => ({ type:HOUR, payload:parseInt(value)}));
+
+    seconds$ = Observable
+    .interval(1000)
+    .mapTo({type:SECOND, payload: 1});
+
   clock;
 
   constructor(store: Store<any>) {
     this.clock = store.select('clock')
 
     Observable.merge(
-        this.click$.mapTo({type:HOUR, payload: 1}),
-        Observable.interval(1000).mapTo({type:SECOND, payload: 1})
+      this.click$,
+      this.seconds$
     )
-      .subscribe((action)=>{
-         store.dispatch(action)
-      })
+      .subscribe(store.dispatch.bind(store))
 }
 
   ngOnInit() {
