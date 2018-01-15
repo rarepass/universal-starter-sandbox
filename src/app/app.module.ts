@@ -23,7 +23,7 @@ import { MessageModule } from './message/message.module';
 // needs @ngrx/store: 4.1.1  
 
 import { StoreModule } from '@ngrx/store';
-import { clock } from './message/message.reducer';
+import { clock, people } from './message/message.reducer';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { clock } from './message/message.reducer';
     TabsModule,
     TodoModule,
     MessageModule,
-    StoreModule.forRoot({clock})
+    StoreModule.forRoot({clock, people})
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]
