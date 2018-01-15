@@ -11,8 +11,19 @@ import { CharacterItemComponent } from './characters/character-list/character-it
 import { CharacterService } from './characters/character.service';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
+
 import { TabsModule } from './tabs/tabs.module';
 import { TodoModule } from './todo/todo.module';
+import { MessageModule } from './message/message.module';
+
+// ngrx
+// https://github.com/ngrx/store-devtools
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+//FormsModule,
+// needs @ngrx/store: 4.1.1  
+
+import { StoreModule } from '@ngrx/store';
+import { clock, people } from './message/message.reducer';
 
 @NgModule({
   declarations: [
@@ -32,6 +43,8 @@ import { TodoModule } from './todo/todo.module';
     ]),
     TabsModule,
     TodoModule,
+    MessageModule,
+    StoreModule.forRoot({clock, people})
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]
